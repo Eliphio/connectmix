@@ -62,6 +62,24 @@ end */;;
 DELIMITER ;
 /*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;
 
+delimiter ||
+CREATE TRIGGER TR_BI_Tasks BEFORE INSERT ON tasks
+FOR EACH ROW BEGIN
+  set new.created_date = now();
+  set new.updated_date = now();
+END;!!
+
+delimiter;
+
+
+delimiter ||
+CREATE TRIGGER TR_BU_Tasks BEFORE UPDATE ON tasks
+FOR EACH ROW BEGIN
+  set new.updated_date = now();
+END;!!
+
+delimiter;
+
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
